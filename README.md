@@ -3,7 +3,9 @@ Step 1 Build the Hardware
 
 1. Go to SampleApp directory
 2. Run the Vivado script from terminal 
-   Vivado -mode tcl -source build.tcl
+```
+Vivado -mode tcl -source build.tcl
+```
 3. Open the Vivado project created (dyractDram.xpr)
 4. Generate IP output products (choose out of context per IP)
 5. Run synth, impl and generate bitstream 
@@ -13,10 +15,12 @@ Step 2 Install the driver
 
 1. Go to driver directory
 2. Run the following
-   sudo make setup
-   make
-   sudo make install
 
+```
+sudo make setup
+make
+sudo make install
+```
 Step 3
 ======
 1. Programme the FPGA with the bitstream generated
