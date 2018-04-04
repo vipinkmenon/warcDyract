@@ -1,12 +1,12 @@
 Step 1 Build the Hardware
 =========================
 
-1. Go to SampleApp directory
+1. Go to SampleStreamApp directory
 2. Run the Vivado script from terminal 
 ```
 Vivado -mode tcl -source build.tcl
 ```
-3. Open the Vivado project created (dyractDram.xpr)
+3. Open the Vivado project created (dyractStream.xpr)
 4. Generate IP output products (choose out of context per IP)
 5. Run synth, impl and generate bitstream 
 
