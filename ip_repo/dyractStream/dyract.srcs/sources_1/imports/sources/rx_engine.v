@@ -139,23 +139,22 @@ module rx_engine  #(
             IDLE : begin
                 m_axis_cq_tready <=  1'b1;                  // Indicate ready to accept TLPs
                 reg_data_valid_o <=  1'b0;
-		user_wr_req_o    <=  1'b0;
-		addr_type_o      <=  m_axis_cq_tdata[1:0];
-		req_addr_o       <=  m_axis_cq_tdata[8:2];
-		req_len_o        <=  m_axis_cq_tdata[74:64];  // Place the packet info on the bus for Tx engine
-		req_rid_o        <=  m_axis_cq_tdata[95:80];
-		req_tag_o        <=  m_axis_cq_tdata[103:96];
-		req_tc_o         <=  m_axis_cq_tdata[123:121];
+                user_wr_req_o    <=  1'b0;
+                addr_type_o      <=  m_axis_cq_tdata[1:0];
+                req_addr_o       <=  m_axis_cq_tdata[8:2];
+                req_len_o        <=  m_axis_cq_tdata[74:64];  // Place the packet info on the bus for Tx engine
+                req_rid_o        <=  m_axis_cq_tdata[95:80];
+                req_tag_o        <=  m_axis_cq_tdata[103:96];
+                req_tc_o         <=  m_axis_cq_tdata[123:121];
                 req_attr_o       <=  m_axis_cq_tdata[126:124];
                 reg_addr_o       <=  {m_axis_cq_tdata[9:2],2'b00};
-		reg_data_o       <=  m_axis_cq_tdata[159:128];
-	        user_data_o      <=  m_axis_cq_tdata[159:128];
-               
+                reg_data_o       <=  m_axis_cq_tdata[159:128];
+                user_data_o      <=  m_axis_cq_tdata[159:128];               
                 if (sop) 
                 begin         
-                    m_axis_cq_tready   <=  1'b0;             // Valid data on the bus
-		    if(m_axis_cq_tdata[78:75] == MEM_RD)    // If memory ready request
-		    begin
+                    if(m_axis_cq_tdata[78:75] == MEM_RD)    // If memory ready request
+                    begin
+                        m_axis_cq_tready   <=  1'b0;             // Valid data on the bus
                         if({m_axis_cq_tdata[11:2],2'b00} != 'h24) // 24 in PIO data reg address
                         begin
                             state         <=  WAIT_FPGA_DATA; 
@@ -166,10 +165,11 @@ module rx_engine  #(
                             state         <=  WAIT_USR_DATA;
                             user_rd_req_o <=  1'b1;
                         end
-	            end   
+                    end   
                     else if(m_axis_cq_tdata[78:75] == MEM_WR) // If memory write request
                     begin
-		        if({m_axis_cq_tdata[11:2],2'b00} != 'h24)  // If the data is intended for global registers 24 in PIO data reg address
+                        m_axis_cq_tready   <=  1'b0;             // Valid data on the bus
+                        if({m_axis_cq_tdata[11:2],2'b00} != 'h24)  // If the data is intended for global registers 24 in PIO data reg address
                         begin  
                             reg_data_valid_o <=   1'b1;    
                         end
@@ -212,7 +212,7 @@ module rx_engine  #(
                 begin
                     state            <=  IDLE;
                     req_compl_wd_o   <=  1'b0;
-		    m_axis_cq_tready <=  1'b1;
+                    m_axis_cq_tready <=  1'b1;
                 end
             end
         endcase

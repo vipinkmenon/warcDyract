@@ -156,9 +156,9 @@ int dyract_periph_rd(unsigned int regaddr);
 
 int fpga_conf_clock(int CLK_GEN_BASE_ADDR, unsigned int freq);
 
-int dyract_send_data(unsigned char * senddata, int sendlen, unsigned int addr);
+int dyract_send_data(unsigned char * senddata, int sendlen);
 
-int dyract_recv_data(unsigned char * recvdata, int recvlen, unsigned int addr);
+int dyract_recv_data(unsigned char * recvdata, int recvlen);
 
 int dyract_download_bit(char *bin_file, unsigned int addr);
 

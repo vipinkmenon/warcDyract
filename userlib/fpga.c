@@ -202,8 +202,8 @@ void fpga_write_word(unsigned char * mptr, unsigned int val) {
     *((unsigned int *)mptr) = val;
 }
 
-int dyract_send_data(unsigned char * senddata, int sendlen, unsigned int addr){
-    fpga_send_data(USERPCIE1, senddata, sendlen, addr);
+int dyract_send_data(unsigned char * senddata, int sendlen){
+    fpga_send_data(USERPCIE1, senddata, sendlen, 0);
 }
 /*The main function used to send PCIe data to the SWITCH DDR interface and the PCIe user stream interfaces
     inputs :destination type (USERPCIE1, USERPCIE2 ...)
@@ -309,8 +309,8 @@ int fpga_send_data(DMA_PNT dest, unsigned char * senddata, int sendlen, unsigned
     return 0;
 }
 
-int dyract_recv_data(unsigned char * recvdata, int recvlen, unsigned int addr) {
-    fpga_recv_data(USERPCIE1, recvdata, recvlen, addr);
+int dyract_recv_data(unsigned char * recvdata, int recvlen) {
+    fpga_recv_data(USERPCIE1, recvdata, recvlen, 0);
 }
 
 
